@@ -3,14 +3,16 @@ let sim = null;
 var name = ""
 
 function setup() {
-	createCanvas(400, 400);
+	createCanvas(400, 400)
 
-	img = loadImage("https://yt3.ggpht.com/a-/AJLlDp1pqPH9_gvQnyGUIjkGjENtVAYqU57DDgHL8Q=s900-mo-c-c0xffffffff-rj-k-no", oi);
+	img = loadImage("https://yt3.ggpht.com/a-/AJLlDp1pqPH9_gvQnyGUIjkGjENtVAYqU57DDgHL8Q=s900-mo-c-c0xffffffff-rj-k-no", renderProcess);
 }
 
-function oi() {
+function renderProcess() {
 	resizeCanvas(img.width, img.height)
 	textSize(img.width * (3 / 100))
+
+	document.getElementById('sketch-holder').append(canvas)
 
 	sim = new simbol()
 }
@@ -38,7 +40,6 @@ function mouseMoved() {
 	console.log(tom)
 	if (tom === "Claro") {
 
-		console.log("oi")
 		sim.tom = 1
 	}
 	if (tom === "Escuro") {
