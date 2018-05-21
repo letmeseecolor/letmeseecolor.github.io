@@ -1,62 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-  <!-- Bootstrap core CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<head>
+	<!-- Bootstrap core CSS -->
+	<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Custom fonts for this template -->
-  <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+	<!-- Custom fonts for this template -->
+	<link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
-  <!-- Plugin CSS -->
-  <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">
+	<!-- Plugin CSS -->
+	<link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">
 
-  <!-- Custom styles for this template -->
-  <link href="css/freelancer.min.css" rel="stylesheet">
+	<!-- Custom styles for this template -->
+	<link href="css/freelancer.min.css" rel="stylesheet">
 
-  <title>blind</title>
-  </head>
+	<link href="css/radialButton.css" rel="stylesheet">
 
-  <body id="page-top">
+	<title>LetMeSeeColor</title>
+</head>
 
-    <!-- Navigation -->
-    <nav class="navbar-expand-lg bg-secondary fixed-top text-uppercase text-center" id="mainNav">
-      <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">
-          LET ME SEE COLOR
-        </a>
-      </div>
-    </nav>
+<body id="page-top">
 
-    <!-- Header -->
-    <header class="masthead bg-primary text-white text-center">
-      <div class="container">
-        <div class="container bg-file">
-          <input type="file" name="picField" id="picField" size="24" onchange="preview_2(this);" alt=""/>
-        </div>
-        <br>
-        <br>
-        <div id="sketch-holder"></div>
-      </div>
-    </header>
+	<!-- Navigation -->
+	<nav class="navbar-expand-lg bg-secondary fixed-top text-uppercase text-center" id="mainNav">
+		<div class="container">
+			<a class="navbar-brand js-scroll-trigger" href="#page-top">
+          		LET ME SEE COLOR
+        	</a>
+		</div>
+	</nav>
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<!-- Header -->
+	<header class="masthead bg-primary text-white text-center" id="draggable">
+		<div class="container">
+			<div>
+				<p>
+					<input type="radio" id="radio1" name="radios" value="all" checked>
+					<label class="unselectable" for="radio1">Normal</label>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/addons/p5.dom.min.js"></script>
-    <script src="colorFinder.js"></script>
-    <script src="simbol.js"></script>
-    <script src="sketch.js"></script>
-    <script src="fileFinder.js"></script>
+					<input type="radio" id="radio2" name="radios" value="false">
+					<label class="unselectable" for="radio2">Deuteronopia</label>
 
-    <div id="footer" class="container text-uppercase text-center">
-      <br>
-      Bruna Tavares Silva, Gustavo Diel, Jonathan de Oliveira Cardoso, Marlon Henry Schweigert, Nicolas Peter Lane
-    </div>
+					<input type="radio" id="radio3" name="radios" value="true">
+					<label class="unselectable" for="radio3">Protanotopia</label>
 
-  </body>
+					<input type="radio" id="radio4" name="radios" value="true">
+					<label class="unselectable" for="radio4">Tritanotopia</label>
+				</p>
+			</div>
+			<div>
+				<p id="infoText">Click and drag to select the color</p>
+			</div>
+			<div class="container bg-file">
+				<input type="file" name="picField" id="picField" size="24" onchange="preview_2(this);" alt="" />
+			</div>
+			<br>
+		</div>
+		<div id="sketch-holder"></div>
+		<div>
+			<input id="btDowImage" type="button" value="Save full image" onclick="onMouseClickedSaveImage()" hidden></input>
+
+			<input id="btDowCode" type="button" value="Save ColorADD code" onclick="onMouseClickedSaveCode()" hidden></input>
+		</div>
+	</header>
+
+	<!-- Bootstrap core JavaScript -->
+	<script src="vendor/jquery/jquery.min.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/addons/p5.dom.min.js"></script>
+	<script src="colorFinder.js"></script>
+	<script src="simbol.js"></script>
+	<script src="handlerFunctions.js"></script>
+	<script src="currentColor.js"></script>
+	<script src="fileFinder.js"></script>
+	<script src="sketch.js"></script>
+
+	<div id="footer" class="container text-uppercase text-center">
+		<p>Bruna Tavares Silva, Gustavo Diel, Jonathan de Oliveira Cardoso, Marlon Henry Schweigert, Nicolas Peter Lane</p>
+	</div>
+
+</body>
+
 </html>
