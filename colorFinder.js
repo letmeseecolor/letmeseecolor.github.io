@@ -339,8 +339,6 @@ PortugueseSimpleColorMap["Cinza:1"] = "#525252"
 PortugueseSimpleColorMap["Preto:2"] = "#2E2E2E"
 PortugueseSimpleColorMap["Preto:1"] = "#000000"
 
-
-
 function rgbFromString(hex) {
 	var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
 	return result ? {
@@ -349,7 +347,6 @@ function rgbFromString(hex) {
 		b: parseInt(result[3], 16)
 	} : null;
 }
-
 
 function findNearestColorName(rgb_tuple) {
 	mindiff = null
@@ -368,7 +365,6 @@ function findNearestColorName(rgb_tuple) {
 			mincolorname = key
 		}
 	});
-
 
 	return mincolorname
 }
