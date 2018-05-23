@@ -1,138 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+		<link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+		<link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">
+		<link href="css/freelancer.min.css" rel="stylesheet">
+		<link href="css/radialButton.css" rel="stylesheet">
+		<link href="css/icons.css" rel="stylesheet">
 
-<head>
-	<!-- Bootstrap core CSS -->
-	<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<title>Let Me See Color</title>
+	</head>
 
-	<!-- Custom fonts for this template -->
-	<link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-	<link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+	<body id="page-top">
+		<nav class="navbar-expand-lg bg-secondary fixed-top text-uppercase text-center" id="mainNav">
+			<div class="container">
+				<a class="navbar-brand js-scroll-trigger" href="#page-top">
+	          		LET ME SEE COLOR
+	        	</a>
+			</div>
+		</nav>
 
-	<!-- Plugin CSS -->
-	<link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">
+		<!-- Header -->
+		<header class="masthead bg-primary text-white text-center" id="draggable">
+			<div class="container">
+				<div>
+					<p>
+						<input type="radio" id="radio1" name="radios" value="all" checked>
+						<label class="unselectable" for="radio1">Normal</label>
 
-	<!-- Custom styles for this template -->
-	<link href="css/freelancer.min.css" rel="stylesheet">
+						<input type="radio" id="radio2" name="radios" value="false">
+						<label class="unselectable" for="radio2">Deuteronopia</label>
 
-	<link href="css/radialButton.css" rel="stylesheet">
-	<link href="css/icons.css" rel="stylesheet">
+						<input type="radio" id="radio3" name="radios" value="true">
+						<label class="unselectable" for="radio3">Protanotopia</label>
 
-	<title>LetMeSeeColor</title>
-</head>
-
-<body id="page-top">
-
-	<!-- Navigation -->
-	<nav class="navbar-expand-lg bg-secondary fixed-top text-uppercase text-center" id="mainNav">
-		<div class="container">
-			<a class="navbar-brand js-scroll-trigger" href="#page-top">
-          		LET ME SEE COLOR
-        	</a>
-		</div>
-	</nav>
-
-	<!-- Header -->
-	<header class="masthead bg-primary text-white text-center" id="draggable">
-		<div class="container">
+						<input type="radio" id="radio4" name="radios" value="true">
+						<label class="unselectable" for="radio4">Tritanotopia</label>
+					</p>
+				</div>
+				<div>
+					<p id="infoText">Click and drag to select the color</p>
+				</div>
+				<div class="container bg-file">
+					<input type="file" name="picField" id="picField" size="24" onchange="preview_2(this);" alt="" />
+				</div>
+				<br>
+			</div>
+			<div id="sketch-holder"></div>
 			<div>
-				<p>
-					<input type="radio" id="radio1" name="radios" value="all" checked>
-					<label class="unselectable" for="radio1">Normal</label>
+				<input id="btDowImage" type="button" value="Save full image" onclick="onMouseClickedSaveImage()" hidden>
 
-					<input type="radio" id="radio2" name="radios" value="false">
-					<label class="unselectable" for="radio2">Deuteronopia</label>
-
-					<input type="radio" id="radio3" name="radios" value="true">
-					<label class="unselectable" for="radio3">Protanotopia</label>
-
-					<input type="radio" id="radio4" name="radios" value="true">
-					<label class="unselectable" for="radio4">Tritanotopia</label>
-				</p>
+				<input id="btDowCode" type="button" value="Save ColorADD code" onclick="onMouseClickedSaveCode()" hidden>
 			</div>
-			<div>
-				<p id="infoText">Click and drag to select the color</p>
-			</div>
-			<div class="container bg-file">
-				<input type="file" name="picField" id="picField" size="24" onchange="preview_2(this);" alt="" />
-			</div>
-			<br>
-		</div>
-		<div id="sketch-holder"></div>
-		<div>
-			<input id="btDowImage" type="button" value="Save full image" onclick="onMouseClickedSaveImage()" hidden>
+		</header>
 
-			<input id="btDowCode" type="button" value="Save ColorADD code" onclick="onMouseClickedSaveCode()" hidden>
-		</div>
-	</header>
+		<!-- Bootstrap core JavaScript -->
+		<script src="vendor/jquery/jquery.min.js"></script>
+		<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-	<!-- Bootstrap core JavaScript -->
-	<script src="vendor/jquery/jquery.min.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/addons/p5.dom.min.js"></script>
+		<script src="colorFinder.js"></script>
+		<script src="simbol.js"></script>
+		<script src="handlerFunctions.js"></script>
+		<script src="currentColor.js"></script>
+		<script src="fileFinder.js"></script>
+		<script src="sketch.js"></script>
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/addons/p5.dom.min.js"></script>
-	<script src="colorFinder.js"></script>
-	<script src="simbol.js"></script>
-	<script src="handlerFunctions.js"></script>
-	<script src="currentColor.js"></script>
-	<script src="fileFinder.js"></script>
-	<script src="sketch.js"></script>
-
-	<div id="footer" class="container">
-		<div><h1 style="text-align: center">Authors</h1></div>
-
-		<div id="textboxBruna">
-			<p class="alignleft"> <span class="userName"> Bruna Tavares Silva </span> </p>
-
-			<p class="alignright">
-				<a class="email" href="mailto:silvatavares.bruna@gmail.com"></a>
-			<p class="alignright">
-				<a class="gitLogo" target="_blank" href="https://github.com/brunats"></a>
-		</div>
-		<div style="clear: both;"></div>
-
-		<div id="textboxDiel">
-			<p class="alignleft"> <span class="userName"> Gustavo Diel </span> </p>
-
-			<p class="alignright">
-				<a class="email" href="mailto:gustavodiel@hotmal.com"> Email </a>
-			<p class="alignright">
-				<a class="gitLogo" target="_blank" href="https://github.com/gustavodiel"> Github </a>
-		</div>
-		<div style="clear: both;"></div>
-
-		<div id="textboxJonny">
-			<p class="alignleft"> <span class="userName"> Jonathan de Oliveira Cardoso </span> </p>
-
-			<p class="alignright">
-				<a class="email" href="mailto:jonnyydeoliveira@gmail.com"> Email </a>
-			<p class="alignright">
-				<a class="gitLogo" target="_blank" href="https://github.com/jonathancardoso"> Github </a>
-		</div>
-		<div style="clear: both;"></div>
-
-		<div id="textboxMarlos">
-			<p class="alignleft"> <span class="userName"> Marlon Henry Schweigert </span> </p>
-
-			<p class="alignright">
-				<a class="email" href="mailto:marlon.henry@magrathealabs.com"> Email </a> </p>
-			<p class="alignright">
-				<a class="gitLogo" target="_blank" href="https://github.com/Schweigert"> Github </a>
-		</div>
-		<div style="clear: both;"></div>
-
-		<div id="textboxNicolas">
-			<p class="alignleft"> <span class="userName"> Nicolas Peter Lane </span> </p>
-
-			<p class="alignright">
-				<a class="email" href="mailto:lambdox@gmail.com"> Email </a> </p>
-			<p class="alignright">
-				<a class="gitLogo" target="_blank" href="https://github.com/lambd0x"> Github </a>
-		</div>
-	</div>
-
-</body>
+		<!-- Footer -->
+		<footer class="footer">
+		  <div class="container">
+				<div class="col-centered text-center">
+					<a>Created with &#10084; by</a>
+				</div>
+				<br>
+				<div class="col-centered">
+					<div class="row">
+						<a class="gitLogo" target="_blank" href="https://github.com/brunats"></a>
+						<a class="gitLogo" target="_blank" href="https://github.com/gustavodiel"></a>
+						<a class="gitLogo" target="_blank" href="https://github.com/jonathancardoso"></a>
+						<a class="gitLogo" target="_blank" href="https://github.com/Schweigert"></a>
+						<a class="gitLogo" target="_blank" href="https://github.com/lambd0x"></a>
+					</div>
+				</div>
+		  </div>
+		</footer>
+	</body>
 
 </html>

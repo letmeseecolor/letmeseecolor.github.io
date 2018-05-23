@@ -48,11 +48,11 @@
 }
 
 .gitLogo {
+    margin: auto;
     display: block;
-    text-indent: -9999px;
     width: 32px;
     height: 32px;
-    background: url(../img/github.svg);
+    background: url(../img/git.png);
     background-size: 32px 32px;
 }
 
