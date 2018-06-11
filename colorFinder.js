@@ -340,7 +340,7 @@ PortugueseSimpleColorMap["Preto:2"] = "#2E2E2E"
 PortugueseSimpleColorMap["Preto:1"] = "#000000"
 
 function rgbFromString(hex) {
-	var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+	let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
 	return result ? {
 		r: parseInt(result[1], 16),
 		g: parseInt(result[2], 16),
@@ -349,19 +349,19 @@ function rgbFromString(hex) {
 }
 
 function findNearestColorName(rgb_tuple) {
-	mindiff = null
-	r = 0
-	g = 0
-	b = 0
-	mincolorname = ""
+	mindiff = null;
+	r = 0;
+	g = 0;
+	b = 0;
+	mincolorname = "";
 	Object.keys(PortugueseSimpleColorMap).forEach(function(key) {
-		c = rgbFromString(PortugueseSimpleColorMap[key])
-		r = c.r
-		g = c.g
-		b = c.b
-		diff = abs(rgb_tuple[0] - r) * 256 + abs(rgb_tuple[1] - g) * 256 + abs(rgb_tuple[2] - b) * 256
+		c = rgbFromString(PortugueseSimpleColorMap[key]);
+		r = c.r;
+		g = c.g;
+		b = c.b;
+		diff = abs(rgb_tuple[0] - r) * 256 + abs(rgb_tuple[1] - g) * 256 + abs(rgb_tuple[2] - b) * 256;
 		if (mindiff == null || diff < mindiff) {
-			mindiff = diff
+			mindiff = diff;
 			mincolorname = key
 		}
 	});

@@ -31,21 +31,21 @@ function mouseReleased() {
 
 // P5 DOM drag callbacks:
 function handleFileDraggedOver( evt ) {
-	infoText.html( "<font color=\"#F00\">Drop the file</font>" )
+	infoText.html( "<font color=\"#F00\">Solte o arquivo</font>" );
 	evt.preventDefault();
 }
 
 function handleFileDraggedLeave( evt ) {
-	infoText.html( "Click and drag to select the color" )
+	infoText.html( "Clique e arraste sobre a imagem para escolher uma cor" );
 	evt.preventDefault();
 }
 
 function handleFileDropped( file ) {
 	if ( file.type === 'image' ) {
 		img = loadImage( file.data, renderProcess );
-		infoText.html( "Click and drag to select the color" )
+		infoText.html( "Clique e arraste sobre a imagem para escolher uma cor" );
 	} else {
-		infoText.html( "<font color=\"#F00\">The file was not an image!</font>" )
+		infoText.html( "<font color=\"#F00\">O arquivo deve ser uma imagem!</font>" );
 	}
 
 }
