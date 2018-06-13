@@ -40,6 +40,7 @@ function setup() {
 	buttonDownloadCode = select("#btDowCode")
 
 	infoText = select("#infoText");
+	fill(color(255,255,255));
 }
 
 /*
