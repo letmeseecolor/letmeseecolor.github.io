@@ -28,15 +28,10 @@ let buttonDownloadCode;
 function setup() {
 	createCanvas(400, 400)
 
-	// img = loadImage( "https://yt3.ggpht.com/a-/AJLlDp1pqPH9_gvQnyGUIjkGjENtVAYqU57DDgHL8Q=s900-mo-c-c0xffffffff-rj-k-no", renderProcess );
-
-	// Add canvas to sketch-holder, so that it is placed in the right place
 	document.getElementById('sketch-holder').append(canvas);
 
 	drag = select("#draggable").drop(handleFileDropped).dragOver(handleFileDraggedOver).dragLeave(handleFileDraggedLeave);
-
 	buttonDownloadImage = select("#btDowImage");
-
 	buttonDownloadCode = select("#btDowCode")
 
 	infoText = select("#infoText");
@@ -163,6 +158,51 @@ function setSim(isRed, isBlue, isYellow, isBranco, tom) {
 	sim.tom = tom
 }
 
+function normalFilter() {
+	rr = 1; rg = 0; rb = 0;
+	gr = 0; gg = 1; gb = 0;
+	br = 0; bg = 0; bb = 1;
+}
+
+function deuteranopiaFilter() {
+	rr = 0.5; rg = 0.5; rb = 0;
+	gr = 0; gg = 1; gb = 0;
+	br = 0.5; bg = 0; bb = 0.5;
+}
+
+function protanotopiaFilter() {
+	rr = 1; rg = 0; rb = 0;
+	gr = 0.5; gg = 0.5; gb = 0;
+	br = 0; bg = 0.5; bb = 0.5;
+}
+
+function tritanotopiaFilter() {
+	rr = 0; rg = 0.5; rb = 0.5;
+	gr = 0.5; gg = 0.5; gb = 0;
+	br = 0; bg = 0; bb = 1;
+}
+
+var rr = 1, rg = 0, rb = 0;
+var gr = 0, gg = 1, gb = 0;
+var br = 0, bg = 0, bb = 1;
+
+function applyFilter() {
+	loadPixels();
+
+		for (var y = 0; y < height; y++) {
+			for (var x = 0; x < width; x++) {
+				var index = (x + y * width) * 4;
+				// R G B
+				pixels[index] = int(pixels[index] * rr + pixels[index + 1] * rg + pixels[index + 2] * rb);
+				pixels[index + 1] = int(pixels[index] * gr + pixels[index + 1] * gg + pixels[index + 2] * gb);
+				pixels[index + 2] = int(pixels[index] * br + pixels[index + 1] * bg + pixels[index + 2] * bb);
+				pixels[index + 3] = pixels[index + 3];
+			}
+		}
+
+	updatePixels();
+}
+
 function draw() {
 	if (doSavingCanvas) {
 		clear();
@@ -194,6 +234,8 @@ function draw() {
 	if (sim) {
 		drawInfo();
 	}
+
+	applyFilter();
 
 	if (sim != null) {
 		sim.show()
