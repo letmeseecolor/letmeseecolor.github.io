@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<!-- HTML 4 -->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<!-- HTML5 -->
+		<meta charset="utf-8"/>
+
 		<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 		<link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
@@ -21,16 +26,19 @@
 	<body id="page-top">
 		<nav class="navbar-expand-lg bg-secondary fixed-top text-uppercase text-center" id="mainNav">
 			<div class="container">
-				<a class="navbar-brand js-scroll-trigger" href="#page-top" data-step="1" data-intro="This is a tooltip!">
-	          		LET ME SEE COLOR
-	        	</a>
+				<a class="navbar-brand js-scroll-trigger" href="#page-top">
+      		LET ME SEE COLOR
+      	</a>
+				<a class="hidden" data-step="1" data-intro="Seja bem vindo ao Let Me See Color \o/"></a>
+				<a class="hidden" data-step="6" data-intro="Lembre-se que por motivos de privacidade, nenhuma foto sua será salva! Nós nos preocupamos contigo! s2"></a>
+				<a class="hidden" data-step="7" data-intro="Qualquer falha, pode contactar diretamente a equipe de desenvolvimento pelo github abrindo um novo ticket de ocorrência ;D"></a>
 			</div>
 		</nav>
 
 		<!-- Header -->
 		<header class="masthead bg-primary text-white text-center" id="draggable">
 			<div class="container">
-				<div>
+				<div data-step="5" data-intro="Após carregar a imagem, você pode escolher o tipo de filtro a qual será aplicado na imagem neste conjunto de botões a fim de auxiliar a sua visão :P">
 					<p>
 						<input type="radio" id="radio1" name="radios" value="all" checked>
 						<label class="unselectable" for="radio1">Normal</label>
@@ -48,12 +56,12 @@
 				<div>
 					<p id="infoText">Clique e arraste sobre a imagem para escolher uma cor</p>
 				</div>
-				<div class="container bg-file">
+				<div class="container bg-file" data-step="4" data-intro="Ou pode utilizar este botão a fim de selecionar a imagem de escolha =)">
 					<input type="file" name="picField" id="picField" size="24" onchange="preview_2(this);" alt="" />
 				</div>
 				<br>
 			</div>
-			<div id="sketch-holder"></div>
+			<div id="sketch-holder" data-step="3" data-intro="Você pode arrastar um arquivo de foto nesta região para carrega-lo =D"></div>
 			<div>
 				<input id="btDowImage" type="button" value="Save full image" onclick="onMouseClickedSaveImage()" hidden>
 
@@ -101,7 +109,10 @@
 		</footer>
 		<script type="text/javascript" src="intro.js"></script>
 		<script>
-			introJs().start();
+			if(document.cookie === ''){
+				introJs().start();
+				document.cookie = "a=yes";
+			}
 		</script>
 	</body>
 
