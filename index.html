@@ -26,12 +26,12 @@
 	<body id="page-top">
 		<nav class="navbar-expand-lg bg-secondary fixed-top text-uppercase text-center" id="mainNav">
 			<div class="container">
+				<a data-step="1" data-intro="Seja bem vindo ao Let Me See Color \o/" hidden></a>
+				<a data-step="6" data-intro="Lembre-se que por motivos de privacidade, nenhuma foto sua será salva! Nós nos preocupamos contigo! s2" hidden></a>
+				<a data-step="7" data-intro="Qualquer falha, pode contactar diretamente a equipe de desenvolvimento pelo github abrindo um novo ticket de ocorrência ;D" hidden></a>
 				<a class="navbar-brand js-scroll-trigger" href="#page-top">
       		LET ME SEE COLOR
       	</a>
-				<a class="hidden" data-step="1" data-intro="Seja bem vindo ao Let Me See Color \o/"></a>
-				<a class="hidden" data-step="6" data-intro="Lembre-se que por motivos de privacidade, nenhuma foto sua será salva! Nós nos preocupamos contigo! s2"></a>
-				<a class="hidden" data-step="7" data-intro="Qualquer falha, pode contactar diretamente a equipe de desenvolvimento pelo github abrindo um novo ticket de ocorrência ;D"></a>
 			</div>
 		</nav>
 
@@ -63,9 +63,12 @@
 			</div>
 			<div id="sketch-holder" data-step="3" data-intro="Você pode arrastar um arquivo de foto nesta região para carrega-lo =D"></div>
 			<div>
-				<input id="btDowImage" type="button" value="Save full image" onclick="onMouseClickedSaveImage()" hidden>
+				<input id="btDowImage" type="button" value="Salvar imagem completa" onclick="onMouseClickedSaveImage()" hidden>
 
-				<input id="btDowCode" type="button" value="Save ColorADD code" onclick="onMouseClickedSaveCode()" hidden>
+				<input id="btDowCode" type="button" value="Salvar Código da imagem" onclick="onMouseClickedSaveCode()" hidden>
+
+				<input id="btDowHelp" type="button" value="Ajuda" onclick="introJs().start()" data-step="2" data-intro="Quando precisar de ajuda, pode clicar aqui ^-^">
+
 			</div>
 		</header>
 
