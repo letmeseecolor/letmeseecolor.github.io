@@ -33,11 +33,13 @@ function mouseReleased() {
 function handleFileDraggedOver( evt ) {
 	infoText.html( "<font color=\"#F00\">Solte o arquivo</font>" );
 	evt.preventDefault();
+	hasUpdate = true;
 }
 
 function handleFileDraggedLeave( evt ) {
 	infoText.html( "Clique e arraste sobre a imagem para escolher uma cor" );
 	evt.preventDefault();
+	hasUpdate = true;
 }
 
 function handleFileDropped( file ) {
@@ -47,5 +49,5 @@ function handleFileDropped( file ) {
 	} else {
 		infoText.html( "<font color=\"#F00\">O arquivo deve ser uma imagem!</font>" );
 	}
-
+	hasUpdate = true;
 }

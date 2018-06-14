@@ -10,4 +10,5 @@ document.getElementById('picField').onchange = function (evt) {
     }
     fr.readAsDataURL(files[0])
   }
+  hasUpdate = true;
 }

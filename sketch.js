@@ -73,6 +73,9 @@ function pickColor(fromMouseClicked) {
 		return false
 	}
 
+	// Force draw
+	hasUpdate = true;
+
 	// Get color from canvas
 	t = get(mouseX, mouseY);
 	let names = findNearestColorName(t).split(":")
@@ -158,35 +161,44 @@ function setSim(isRed, isBlue, isYellow, isBranco, tom) {
 	sim.tom = tom
 }
 
+
 function normalFilter() {
 	rr = 1; rg = 0; rb = 0;
 	gr = 0; gg = 1; gb = 0;
 	br = 0; bg = 0; bb = 1;
+	normalFilterApplyied = true;
 }
 
 function deuteranopiaFilter() {
 	rr = 0.5; rg = 0.5; rb = 0;
 	gr = 0; gg = 1; gb = 0;
 	br = 0.5; bg = 0; bb = 0.5;
+	normalFilterApplyied = false;
 }
 
 function protanotopiaFilter() {
 	rr = 1; rg = 0; rb = 0;
 	gr = 0.5; gg = 0.5; gb = 0;
 	br = 0; bg = 0.5; bb = 0.5;
+	normalFilterApplyied = false;
 }
 
 function tritanotopiaFilter() {
 	rr = 0; rg = 0.5; rb = 0.5;
 	gr = 0.5; gg = 0.5; gb = 0;
 	br = 0; bg = 0; bb = 1;
+	normalFilterApplyied = false;
 }
 
+var normalFilterApplyied = true;
 var rr = 1, rg = 0, rb = 0;
 var gr = 0, gg = 1, gb = 0;
 var br = 0, bg = 0, bb = 1;
 
 function applyFilter() {
+	if(normalFilterApplyied) {
+		return;
+	}
 	loadPixels();
 
 		for (var y = 0; y < height; y++) {
@@ -203,7 +215,22 @@ function applyFilter() {
 	updatePixels();
 }
 
+var hasUpdate = true;
+var forceDrawn = 0;
 function draw() {
+	forceDrawn++;
+
+	if(forceDrawn > 30){
+		hasUpdate = true;
+	}
+
+	if (!hasUpdate) {
+		return;
+	}
+
+	forceDrawn = 0;
+	hasUpdate = false;
+
 	if (doSavingCanvas) {
 		clear();
 	} else {
@@ -232,11 +259,10 @@ function draw() {
 
 	pop();
 
+	applyFilter();
 	if (sim) {
 		drawInfo();
 	}
-
-	applyFilter();
 
 	if (sim != null) {
 		sim.show()
@@ -248,16 +274,16 @@ function draw() {
 }
 
 function drawInfo() {
-	textSize(16);
+	textSize(14);
 	push();
 
 	translate(width - SIZE_INFO_WIDTH + 12, height / 2);
 
-	text(current_color.getName(), 0, 50);
-	text(current_color.getRGB(), 0, 75);
+	text(current_color.getName(), 45, 30);
+	text(current_color.getRGB(), 45, 50);
 
-	strokeWeight(2);
-	translate(25, 100);
+	translate(50, 60);
+	strokeWeight(1);
 	fill(current_color.r, current_color.g, current_color.b);
 	rect(0, 0, SIZE_INFO_WIDTH / 2, SIZE_INFO_WIDTH / 2, 15);
 
