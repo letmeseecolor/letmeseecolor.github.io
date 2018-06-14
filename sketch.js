@@ -217,6 +217,7 @@ function draw() {
 		pop();
 		return
 	}
+	background(122,203,153,255);
 	image(img, 0, 0, width - SIZE_INFO_WIDTH, height);
 
 	push();
