@@ -207,7 +207,7 @@ function draw() {
 	if (doSavingCanvas) {
 		clear();
 	} else {
-		background(32, 201, 151);
+		background(0,0,0,0);
 	}
 	if (!img) {
 		push();
