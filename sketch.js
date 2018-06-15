@@ -25,6 +25,9 @@ let infoText;
 let buttonDownloadImage;
 let buttonDownloadCode;
 
+let backupPixels = [];
+let backupPixelsHasFilled = false;
+
 function setup() {
 	createCanvas(400, 400)
 
@@ -35,7 +38,9 @@ function setup() {
 	buttonDownloadCode = select("#btDowCode")
 
 	infoText = select("#infoText");
-	fill(color(255,255,255));
+	fill(color(255, 255, 255));
+
+	pixelDensity(1);
 }
 
 /*
@@ -50,8 +55,6 @@ function renderProcess() {
 		resizeCanvas(img.width + SIZE_INFO_WIDTH, max(img.height, MIN_CANVAS_HEIGHT));
 	}
 
-	console.log(img.width, MAX_CANVAS_WIDTH);
-
 	delete sim;
 	sim = new simbol();
 
@@ -60,6 +63,14 @@ function renderProcess() {
 
 	buttonDownloadImage.elt.hidden = false;
 	buttonDownloadCode.elt.hidden = false;
+
+	backupPixels = [];
+	backupPixelsHasFilled = false;
+
+	first = false
+
+
+	pixelDensity(1);
 }
 
 function pickColor(fromMouseClicked) {
@@ -77,7 +88,18 @@ function pickColor(fromMouseClicked) {
 	hasUpdate = true;
 
 	// Get color from canvas
-	t = get(mouseX, mouseY);
+	let t;
+	if (normalFilterApplyied) {
+		t = get(mouseX, mouseY);
+	} else {
+		let index = (floor(mouseX) + floor(mouseY) * width) * 4;
+		t = [
+			backupPixels[index],
+			backupPixels[index + 1],
+			backupPixels[index + 2],
+			backupPixels[index + 3],
+		]
+	}
 	let names = findNearestColorName(t).split(":")
 	let cor;
 	let tom;
@@ -163,64 +185,104 @@ function setSim(isRed, isBlue, isYellow, isBranco, tom) {
 
 
 function normalFilter() {
-	rr = 1; rg = 0; rb = 0;
-	gr = 0; gg = 1; gb = 0;
-	br = 0; bg = 0; bb = 1;
+	rr = 1;
+	rg = 0;
+	rb = 0;
+	gr = 0;
+	gg = 1;
+	gb = 0;
+	br = 0;
+	bg = 0;
+	bb = 1;
 	normalFilterApplyied = true;
 }
 
 function deuteranopiaFilter() {
-	rr = 0.5; rg = 0.5; rb = 0;
-	gr = 0; gg = 1; gb = 0;
-	br = 0.5; bg = 0; bb = 0.5;
+
+	rr = 0.5;
+	rg = 0.5;
+	rb = 0;
+	gr = 0;
+	gg = 1;
+	gb = 0;
+	br = 0.5;
+	bg = 0;
+	bb = 0.5;
 	normalFilterApplyied = false;
 }
 
 function protanotopiaFilter() {
-	rr = 1; rg = 0; rb = 0;
-	gr = 0.5; gg = 0.5; gb = 0;
-	br = 0; bg = 0.5; bb = 0.5;
+	rr = 1;
+	rg = 0;
+	rb = 0;
+	gr = 0.5;
+	gg = 0.5;
+	gb = 0;
+	br = 0;
+	bg = 0.5;
+	bb = 0.5;
 	normalFilterApplyied = false;
 }
 
 function tritanotopiaFilter() {
-	rr = 0; rg = 0.5; rb = 0.5;
-	gr = 0.5; gg = 0.5; gb = 0;
-	br = 0; bg = 0; bb = 1;
+	rr = 0;
+	rg = 0.5;
+	rb = 0.5;
+	gr = 0.5;
+	gg = 0.5;
+	gb = 0;
+	br = 0;
+	bg = 0;
+	bb = 1;
 	normalFilterApplyied = false;
 }
 
 var normalFilterApplyied = true;
-var rr = 1, rg = 0, rb = 0;
-var gr = 0, gg = 1, gb = 0;
-var br = 0, bg = 0, bb = 1;
+var rr = 1,
+	rg = 0,
+	rb = 0;
+var gr = 0,
+	gg = 1,
+	gb = 0;
+var br = 0,
+	bg = 0,
+	bb = 1;
 
 function applyFilter() {
-	if(normalFilterApplyied) {
+	if (normalFilterApplyied) {
 		return;
 	}
 	loadPixels();
 
-		for (var y = 0; y < height; y++) {
-			for (var x = 0; x < width; x++) {
-				var index = (x + y * width) * 4;
-				// R G B
-				pixels[index] = int(pixels[index] * rr + pixels[index + 1] * rg + pixels[index + 2] * rb);
-				pixels[index + 1] = int(pixels[index] * gr + pixels[index + 1] * gg + pixels[index + 2] * gb);
-				pixels[index + 2] = int(pixels[index] * br + pixels[index + 1] * bg + pixels[index + 2] * bb);
-				pixels[index + 3] = pixels[index + 3];
+	for (var y = 0; y < height; y++) {
+		for (var x = 0; x < width - SIZE_INFO_WIDTH; x++) {
+			var index = (x + y * width) * 4;
+
+			if (!backupPixelsHasFilled) {
+				backupPixels[index + 0] = pixels[index + 0];
+				backupPixels[index + 1] = pixels[index + 1];
+				backupPixels[index + 2] = pixels[index + 2];
+				backupPixels[index + 3] = pixels[index + 3];
 			}
+
+			// R G B
+			pixels[index] = int(pixels[index] * rr + pixels[index + 1] * rg + pixels[index + 2] * rb);
+			pixels[index + 1] = int(pixels[index] * gr + pixels[index + 1] * gg + pixels[index + 2] * gb);
+			pixels[index + 2] = int(pixels[index] * br + pixels[index + 1] * bg + pixels[index + 2] * bb);
 		}
+	}
+	backupPixelsHasFilled = true
 
 	updatePixels();
 }
 
 var hasUpdate = true;
 var forceDrawn = 0;
+
 function draw() {
 	forceDrawn++;
 
-	if(forceDrawn > 30){
+	if (forceDrawn > 30) {
 		hasUpdate = true;
 	}
 
@@ -234,7 +296,7 @@ function draw() {
 	if (doSavingCanvas) {
 		clear();
 	} else {
-		background(0,0,0,0);
+		background(0, 0, 0, 0);
 	}
 	if (!img) {
 		push();
@@ -244,7 +306,7 @@ function draw() {
 		pop();
 		return
 	}
-	background(122,203,153,255);
+	background(122, 203, 153, 255);
 	image(img, 0, 0, width - SIZE_INFO_WIDTH, height);
 
 	push();
@@ -271,6 +333,7 @@ function draw() {
 		doSavingCanvas = false
 		saveCanvas('letmeseecolor_image', 'png');
 	}
+
 }
 
 function drawInfo() {
